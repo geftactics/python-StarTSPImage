@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
-version = '0.2.2'
+version = '0.2.3'
 
 setup(
     name='StarTSPImage',
-    version=version,,
+    version=version,
     packages=find_packages(),
     license='MIT',
     description='Creates Star graphics mode raster images for use with Star TSP series thermal printers',
