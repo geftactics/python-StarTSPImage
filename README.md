@@ -1,9 +1,40 @@
-# python-StarTSP100
+# python-StarTSPImage
 
-The Star TSP100 / TSP143 printers do not support Star line mode commands natively, these are usually provided by a driver performing some kind of emulation. As such, it's not possible to simply send text to the appropriate `/dev` point, because these printers only support Star graphic mode.
+**Print from Python to Star TSP100/143/650/654**
 
-You can find the graphic mode commands here: http://www.starasia.com/Download/Manual/star_graphic_cm_en.pdf
+Star TSP100/TSP143 printers do not have any font sets etc on board the printer, so any data being sent directly to the printer must first be converted into a raster image using the appropriate graphic mode commands. (Star do provide a driver that emulates Star line mode commands, but we can't use this it we want to interact directly with the printer)
 
-This project will take an image file (Any format that Pythons Pillow library can open), resize it to the appropriate width for the printer, and then create a binary output of the raster commands, which can be send directly to the device.
+This project will take an image file (Either as a PIL image, or from file on disk), scale it to the appropriate width for the printer, and then create a binary output of the graphic mode raster commands, which then can be send directly to the device.
 
-To get started simply: `python3 StarTSP100.py > /dev/usb/lp0` (Replacing with the appropriate dev path)
+For further more detailed reading, you can find the graphic mode command manual at: http://www.starasia.com/Download/Manual/star_graphic_cm_en.pdf
+
+## Installing
+`pip3 install python-StarTSPImage`
+
+## Examples
+
+Print a file from disk:
+```
+import StarTSP
+
+raster = StarTSP.imageFileToRaster('file.bmp')
+
+printer = open('/dev/usb/lp0', 'wb')
+printer.write(raster)
+```
+
+
+Create a PIL image and print:
+```
+import StarTSP
+from PIL import Image, ImageDraw
+
+image = Image.new('RGB', (500, 500), color='White')
+draw = ImageDraw.Draw(image)
+draw.ellipse((0, 0, 500, 500), fill='Black')
+
+raster = StarTSP.imageToRaster(image)
+
+printer = open('/dev/usb/lp0', "wb")
+printer.write(raster)
+```
