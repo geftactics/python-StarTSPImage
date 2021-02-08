@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     install_requires=['Pillow'],
     url='https://github.com/geftactics/python-StarTSPImage',
-    download_url = 'https://github.com/geftactics/python-StarTSPImage/archive/0.1.0.tar.gz'
+    download_url = 'https://github.com/geftactics/python-StarTSPImage/archive/0.1.0.tar.gz',
     author='Geoff Kendal',
     author_email='Geoff@squiggle.org'
 )
