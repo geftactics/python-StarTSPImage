@@ -1,1 +1,1 @@
-import StarTSPImage
+from StarTSPImage.StarTSPImage import imageFileToRaster imageToRaster
