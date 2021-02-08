@@ -17,7 +17,7 @@ Print a file from disk:
 ```
 import StarTSPImage
 
-raster = StarTSPImage.imageFileToRaster('file.bmp')
+raster = StarTSPImage.imageFileToRaster('rar.bmp')
 
 printer = open('/dev/usb/lp0', 'wb')
 printer.write(raster)
