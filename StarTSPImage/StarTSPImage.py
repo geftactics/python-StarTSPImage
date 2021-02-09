@@ -10,7 +10,7 @@ def buildRaster(img):
   basewidth = bytes_per_line * 8
   wpercent = (basewidth / float(img.width))
   hsize = int((float(img.height) * float(wpercent)))
-  img = PIL.ImageOps.invert(img)
+  img = PIL.ImageOps.invert(img.convert('RGB'))
   img = img.convert(mode='1', dither=Image.FLOYDSTEINBERG).resize((basewidth, hsize))
 
   # PIL mode 1 image (1-bit pixels, black and white, one pixel per byte)
