@@ -31,7 +31,7 @@ def buildRaster(img):
       byte += 1
     buf.extend(line_bytes)
 
-  buf.extend([0x1b, ord('*'), ord('r'), ord('b')]) # Quit raster mode
+  buf.extend([0x1b, ord('*'), ord('r'), ord('B')]) # Quit raster mode
 
   return bytearray(buf)
 
