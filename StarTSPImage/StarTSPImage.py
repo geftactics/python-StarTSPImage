@@ -2,7 +2,7 @@ import PIL.ImageOps
 from PIL import Image
 
 
-def buildRaster(img):
+def buildRaster(img, cut=True):
 
   bytes_per_line = 72
 
@@ -21,6 +21,10 @@ def buildRaster(img):
   buf.extend([0x1b, ord('*'), ord('r'), ord('A')])                  # Enter raster mode
   buf.extend([0x1b, ord('*'), ord('r'), ord('P'), ord('0'), 0x00])  # continuous mode
 
+  # Handle cuts
+  if not cut:
+      buf.extend([0x1b, ord('*'), ord('r'), ord('E'), ord('1'), 0x00]) # Raster EOT no-cut
+
   # Loop over bytes array, adding a transfer data command for each line
   # followed by the amount of bytes that make up a line
   byte = 0
@@ -36,10 +40,10 @@ def buildRaster(img):
   return bytearray(buf)
 
 
-def imageToRaster(img):
-  return buildRaster(img)
+def imageToRaster(img, cut=True):
+  return buildRaster(img, cut)
 
 
-def imageFileToRaster(image_path):
+def imageFileToRaster(image_path, cut=True):
   img = Image.open(image_path)
-  return buildRaster(img)
+  return buildRaster(img, cut)
