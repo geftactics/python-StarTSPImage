@@ -70,3 +70,12 @@ if dev:
 else:
     print('Could not find device')
 ```
+
+
+Long printing:
+You might need to break the raster image up into chunks, and then send to the printer...
+```
+import funcy
+for bytechunk in list(funcy.chunks(128*1024, raster)): 
+    dev.write(2, bytechunk)
+```
